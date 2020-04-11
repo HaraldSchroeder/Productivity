@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+
+    <color name="time_button_pressed">#CCCCCC</color>
+    <color name="time_button_unpressed">#888888</color>
+
+    <color name="slider_background">#422795</color>
+    <color name="transparent">#00000000</color>
+    <array name="gradient">
+        <item>#b5fff6</item>
+        <item>#00ffbf</item>
+        <item>#00bfa4</item>
+        <item>#007c6a</item>
+    </array>
+
+</resources>

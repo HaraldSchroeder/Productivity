@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Productivity</string>
+    <string name="bt_addTag">Add Tag</string>
+    <string name="switch_notification">Notification</string>
+</resources>
