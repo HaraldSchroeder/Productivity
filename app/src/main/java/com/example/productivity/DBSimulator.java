@@ -10,6 +10,7 @@ public class DBSimulator {
     public static boolean initialized = false;
 
     public static String[][] dbSessions = new String[5][4];
+    public static boolean dbSessionsInitialized = false;
 
     public static void InitializeTestArray() {
         for (int i = 0; i < dbTags.length; i++) {
@@ -74,7 +75,7 @@ public class DBSimulator {
         for (int i = 0; i < dbSessions.length; i++) {
             dbSessions[i][0] = i + "";
             dbSessions[i][1] = (i * 2 + 5) + "";
-            dbSessions[i][2] = "tag01, tag02";
+            dbSessions[i][2] = "tag0" + i + ", tagasdf" + i;
             dbSessions[i][3] = "date and time";
         }
     }
