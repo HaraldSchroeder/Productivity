@@ -24,7 +24,7 @@ public class TagsSelectionPopup {
 
 
     public void createTagsSelectionPopup(int x,int y,int w,int h,Context context,LinearLayout l){
-
+        Log.d("PIMMEL","test1");
         //popup window
         PopupWindow popup = new PopupWindow(context);
         //fade in/out animation
@@ -65,7 +65,7 @@ public class TagsSelectionPopup {
         tags_area_layout.setOrientation(LinearLayout.VERTICAL);
         tags_area_layout.setPadding(5,5,5,5);
         tags_area_layout.setBackgroundColor(context.getResources().getColor(R.color.green));
-
+        Log.d("PIMMEL","test2");
         DBSimulator.InitializeTestArray();
 
         //fill tags area with tags (rows of tags)
@@ -119,7 +119,7 @@ public class TagsSelectionPopup {
         comment_header.setText("Kommentar");
         comment_header.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
         ground_layout.addView(comment_header);
-
+        Log.d("PIMMEL","test3");
         //edit text area
         EditText edit_text_area = new EditText(context);
         LinearLayout.LayoutParams edit_text_area_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -154,7 +154,7 @@ public class TagsSelectionPopup {
 
         ground_layout.addView(button_layout);
 
-
+        Log.d("PIMMEL","test4");
         popup.setFocusable(true);
         popup.update();
 
@@ -165,7 +165,7 @@ public class TagsSelectionPopup {
         popup.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.green)));
 
         popup.showAtLocation(l, Gravity.NO_GRAVITY, dpToPx(x,context), dpToPx(y,context));
-
+        Log.d("PIMMEL","test5");
     }
 
 
