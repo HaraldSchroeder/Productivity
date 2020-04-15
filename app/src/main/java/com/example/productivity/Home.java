@@ -137,12 +137,13 @@ public class Home extends AppCompatActivity {
         pen_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("PIMMEL","test0");
                 DisplayMetrics displayMetrics = Home.this.getResources().getDisplayMetrics();
                 float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
                 TagsSelectionPopup popup = new TagsSelectionPopup();
+
                 popup.createTagsSelectionPopup((int)(0.05 * dpWidth),83,(int)(0.9 * dpWidth),0,Home.this,(LinearLayout) findViewById(R.id.Content));
-                //popup.createTagsSelectionPopup(40,500,324,0,Home.this,(LinearLayout) findViewById(R.id.Content));
             }
         });
         /* //use this for the button in the popupwindow
