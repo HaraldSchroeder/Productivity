@@ -30,13 +30,13 @@ public class TagsSelectionPopup {
         //fade in/out animation
         //popup.setAnimationStyle(R.style.Animation);
         //set popup width to window width
-        //popup.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-        //popup.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        popup.setWidth(dpToPx(w,context));
+        popup.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
 
 
         //create first linear layout. It defines the orientiation (vertical) and the background color of the popup
         LinearLayout ground_layout = new LinearLayout(context);
-        LinearLayout.LayoutParams ground_layout_params = new LinearLayout.LayoutParams(dpToPx(w,context),LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams ground_layout_params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
 
         ground_layout.setLayoutParams(ground_layout_params);
         ground_layout.setPadding(20,10,20,10);
@@ -165,7 +165,7 @@ public class TagsSelectionPopup {
         popup.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.green)));
 
         popup.showAtLocation(lt, Gravity.CENTER, 0, 0);
-        popup.update();
+        popup.update(0, 0, popup.getWidth(), popup.getHeight());
         Log.d("PIMMEL","test5");
     }
 
