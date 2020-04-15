@@ -31,6 +31,9 @@ import org.w3c.dom.Text;
 
 public class Home extends AppCompatActivity {
 
+    private final int HOUR_MODE = 0;
+    private final int MINUTE_MODE = 1;
+
     public int max_progress = 100;
 
     public double max_hour = 24;
@@ -112,7 +115,7 @@ public class Home extends AppCompatActivity {
         hour_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                time_mode = 0;
+                time_mode = HOUR_MODE;
                 circular_seekbar.setProgress(progress_hour);
                 hour_button.setBackgroundColor(getResources().getColor(R.color.time_button_pressed));
                 minute_button.setBackgroundColor(getResources().getColor(R.color.time_button_unpressed));
@@ -123,7 +126,7 @@ public class Home extends AppCompatActivity {
         minute_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                time_mode = 1;
+                time_mode = MINUTE_MODE;
                 circular_seekbar.setProgress(progress_minute);
                 hour_button.setBackgroundColor(getResources().getColor(R.color.time_button_unpressed));
                 minute_button.setBackgroundColor(getResources().getColor(R.color.time_button_pressed));
@@ -131,24 +134,15 @@ public class Home extends AppCompatActivity {
         });
 
 
-        popUp = new PopupWindow(Home.this);
-        popUp.setAnimationStyle(R.style.Animation);
-        LinearLayout linear_layout_popup = new LinearLayout(Home.this);
-        LinearLayout.LayoutParams pupUpParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        linear_layout_popup.setOrientation(LinearLayout.VERTICAL);
-        linear_layout_popup.setLayoutParams(pupUpParams);
-        TextView tv = new TextView(Home.this);
-        tv.setText("Hello World");
-        linear_layout_popup.addView(tv);
-        linear_layout_popup.setBackgroundColor(getResources().getColor(R.color.red));
-        popUp.setContentView(linear_layout_popup);
-        popUp.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.green)));
         pen_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                popUp.showAtLocation((LinearLayout) findViewById(R.id.Content), Gravity.NO_GRAVITY, 100, 300);
+                DisplayMetrics displayMetrics = Home.this.getResources().getDisplayMetrics();
+                float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+                float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+                TagsSelectionPopup popup = new TagsSelectionPopup();
+                popup.createTagsSelectionPopup((int)(0.05 * dpWidth),83,(int)(0.9 * dpWidth),0,Home.this,(LinearLayout) findViewById(R.id.Content));
+                //popup.createTagsSelectionPopup(40,500,324,0,Home.this,(LinearLayout) findViewById(R.id.Content));
             }
         });
         /* //use this for the button in the popupwindow
@@ -234,8 +228,9 @@ public class Home extends AppCompatActivity {
     }
 
 
+
     private boolean isModeHour(int time_mode) {
-        return time_mode == 0;
+        return time_mode == HOUR_MODE;
     }
 
 

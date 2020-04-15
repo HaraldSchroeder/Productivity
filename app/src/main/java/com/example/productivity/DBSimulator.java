@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class DBSimulator {
 
-    public static String[][] dbTags = new String[5][2];
+    public static String[][] dbTags = new String[30][2];
     public static boolean initialized = false;
 
     public static String[][] dbSessions = new String[5][4];
@@ -14,7 +14,7 @@ public class DBSimulator {
     public static void InitializeTestArray() {
         for (int i = 0; i < dbTags.length; i++) {
             dbTags[i][0] = Integer.toString(GenerateRandomColor());
-            dbTags[i][1] = "tagstring" + i;
+            dbTags[i][1] = createRandomWord((new Random()).nextInt(10-3) + 3);
         }
     }
 
@@ -77,6 +77,17 @@ public class DBSimulator {
             dbSessions[i][2] = "tag01, tag02";
             dbSessions[i][3] = "date and time";
         }
+    }
+
+
+    private static String createRandomWord(int word_length){
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        Random r = new Random();
+        String word = "";
+        for(int i = 0; i < word_length; i++){
+            word += alphabet.charAt(r.nextInt(alphabet.length()));
+        }
+        return word;
     }
 
 }
