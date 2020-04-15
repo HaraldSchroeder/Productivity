@@ -23,7 +23,7 @@ import java.util.Random;
 public class TagsSelectionPopup {
 
 
-    public void createTagsSelectionPopup(int x,int y,int w,int h,Context context,LinearLayout l){
+    public void createTagsSelectionPopup(int x,int y,int w,int h,Context context,LinearLayout lt){
         Log.d("PIMMEL","test1");
         //popup window
         PopupWindow popup = new PopupWindow(context);
@@ -156,7 +156,7 @@ public class TagsSelectionPopup {
 
         Log.d("PIMMEL","test4");
         popup.setFocusable(true);
-        popup.update();
+
 
 
 
@@ -164,7 +164,8 @@ public class TagsSelectionPopup {
         popup.setContentView(ground_layout);
         popup.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.green)));
 
-        popup.showAtLocation(l, Gravity.NO_GRAVITY, dpToPx(x,context), dpToPx(y,context));
+        popup.showAtLocation(lt, Gravity.CENTER, 0, 0);
+        popup.update();
         Log.d("PIMMEL","test5");
     }
 
