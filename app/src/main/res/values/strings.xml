@@ -2,4 +2,9 @@
     <string name="app_name">Productivity</string>
     <string name="bt_addTag">Add Tag</string>
     <string name="switch_notification">Notification</string>
+    <string name="bt_start">Start</string>
+    <string name="bt_stop">Stop</string>
+    <string name="bt_reset">Reset</string>
+    <string name="bt_stopwatch">Stopwatch</string>
+    <string name="bt_timer">Timer</string>
 </resources>

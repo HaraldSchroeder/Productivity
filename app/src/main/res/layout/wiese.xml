@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_tag_dropdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Spinner
+            android:id="@+id/spinner_tags"
+            android:layout_width="420dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <LinearLayout
         android:id="@+id/tab_menu"
         android:layout_width="match_parent"
@@ -13,14 +33,15 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/container_tag_dropdown">
 
         <Button
             android:id="@+id/btn_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
-            android:onClick="ShowData"
+            android:onClick="SelectDateRange"
+            android:tag="btn_day"
             android:text="Day"
             tools:layout_editor_absoluteX="12dp"
             tools:layout_editor_absoluteY="17dp" />
@@ -31,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:onClick="ShowData"
+            android:onClick="SelectDateRange"
             android:text="Week" />
 
         <Button
@@ -40,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:onClick="ShowData"
+            android:onClick="SelectDateRange"
             android:text="Month" />
 
         <Button
@@ -49,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:onClick="ShowData"
+            android:onClick="SelectDateRange"
             android:text="Year" />
 
     </LinearLayout>
@@ -99,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tab_menu">
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DATUM"
@@ -115,6 +136,7 @@
             android:text="L"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:onClick="ChangeSelectedDateRange"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
@@ -122,6 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R"
+            android:onClick="ChangeSelectedDateRange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
