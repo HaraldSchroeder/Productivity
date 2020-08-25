@@ -23,5 +23,7 @@
         <activity android:name=".Growing"></activity>
         <activity android:name=".Settings"></activity>
         <activity android:name=".Wiese"></activity>
+        <activity android:name=".Stopwatch"></activity>
+        <activity android:name=".Timer"></activity>
     </application>
 </manifest>
