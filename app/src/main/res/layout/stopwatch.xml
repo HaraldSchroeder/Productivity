@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_orange_light">
@@ -47,14 +48,34 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="223dp"
         android:layout_marginRight="97dp"
+        android:onClick="endSession"
         android:text="Save" />
 
     <TextView
         android:id="@+id/tv_placeholderTags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/bt_editTags"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Tags Placeholder" />
+
+    <Button
+        android:id="@+id/bt_editTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_time"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="63dp"
-        android:text="Tags Placeholder" />
+        android:layout_marginTop="10dp"
+        android:onClick="editTags"
+        android:text="Edit Tags" />
+
+    <TextView
+        android:id="@+id/tv_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="104dp"
+        android:text="You're doing a great job!" />
 </RelativeLayout>

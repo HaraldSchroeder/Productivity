@@ -1,15 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_purple"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="222dp">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finish"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="202dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="66dp"
+        android:text="Great job! Productive time:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_timeview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_notification"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="PRODUCTIVE TIME"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/bt_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="returnHome"
+        android:text="Home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_repeatSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="284dp"
+        android:onClick="repeatSession"
+        android:text="Repeat Session" />
+
+    <Button
+        android:id="@+id/bt_breakTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="284dp"
+        android:layout_marginRight="50dp"
+        android:text="Take a break" />
+
+    <TextView
+        android:id="@+id/tv_tagsPlaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bt_editTags"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:text="Tags Placeholder" />
+
+    <Button
+        android:id="@+id/bt_editTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:onClick="editTags"
+        android:text="Edit Tags" />
+
+</RelativeLayout>

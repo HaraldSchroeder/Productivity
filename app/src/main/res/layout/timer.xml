@@ -1,20 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="144dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_red_light">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_timeview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="254dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="00:00:00"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/tv_tagsPlaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:text="Tags Placeholder" />
+
+    <Button
+        android:id="@+id/bt_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="158dp"
+        android:layout_marginRight="92dp"
+        android:onClick="endSession"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/bt_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="158dp"
+        android:onClick="onClickStop"
+        android:text="Pause"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/bt_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="158dp"
+        android:onClick="onClickStart"
+        android:text="Continue"
+        tools:visibility="gone" />
+</RelativeLayout>

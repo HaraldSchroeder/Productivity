@@ -1,9 +1,17 @@
 package com.example.productivity;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +39,8 @@ public class Stopwatch extends AppCompatActivity {
 
     private View bt_pause;
     private View bt_continue;
+
+    private PopupWindow tagsPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +166,25 @@ public class Stopwatch extends AppCompatActivity {
                 handler.postDelayed(this, 1000);
             }
         });
+    }
+
+    public void endSession(View view) {
+        Intent loadPage = new Intent(this, Finish.class);
+        startActivity(loadPage);
+    }
+
+    public void editTags(View view) {
+        RelativeLayout rl_root = (RelativeLayout) findViewById(R.id.rl_root);
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View customView = layoutInflater.inflate(R.layout.popup, null);
+        Button bt_editTags = (Button) findViewById(R.id.bt_editTags);
+        Button bt_closePopup = (Button) customView.findViewById(R.id.bt_close);
+        tagsPopup = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        tagsPopup.showAtLocation(rl_root, Gravity.CENTER, 0, 0);
+    }
+
+    public void closePopup(View view) {
+        tagsPopup.dismiss();
     }
 
 }

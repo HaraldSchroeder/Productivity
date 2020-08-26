@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
-            android:id="@+id/spinner_tags"
+            android:id="@+id/sp_tagSelection"
             android:layout_width="420dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -102,6 +102,10 @@ public class Home_2 extends AppCompatActivity implements AdapterView.OnItemSelec
 
     public void startTimer(View view) {
         Intent loadPage = new Intent(this, Timer.class);
+        int hours = 1;
+        int minutes = 10;
+        loadPage.putExtra("hours", hours);
+        loadPage.putExtra("minutes", minutes);
         startActivity(loadPage);
     }
 

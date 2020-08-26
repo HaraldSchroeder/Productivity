@@ -8,6 +8,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class Wiese extends AppCompatActivity {
+public class Wiese extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button btn_active; // References the currently pressed button (day, week, month, year)
     private int btn_active_color; // currently active
@@ -150,6 +151,21 @@ public class Wiese extends AppCompatActivity {
         }
 
         SelectDateRange((View)btn_active);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
 /*
