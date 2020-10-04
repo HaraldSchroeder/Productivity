@@ -1,7 +1,21 @@
 package com.example.productivity;
 
 import android.graphics.Color;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 public class DBSimulator {
@@ -9,8 +23,14 @@ public class DBSimulator {
     public static String[][] dbTags = new String[30][2];
     public static boolean initialized = false;
 
-    public static String[][] dbSessions = new String[5][4];
+    public static List<String> dbTagsList = new ArrayList<String>();
+    public static boolean listInitialized = false;
+
+    public static String[][] dbSessions = new String[4][4];
     public static boolean dbSessionsInitialized = false;
+
+    private int start_of_week = 1; // 1 = Sunday, 2 = Monday
+    private Calendar c;
 
     public static void InitializeTestArray() {
         for (int i = 0; i < dbTags.length; i++) {
@@ -73,10 +93,16 @@ public class DBSimulator {
 
     public static void InitializeSessionArray() {
         for (int i = 0; i < dbSessions.length; i++) {
-            dbSessions[i][0] = i + "";
-            dbSessions[i][1] = (i * 2 + 5) + "";
-            dbSessions[i][2] = "tag0" + i + ", tagasdf" + i;
-            dbSessions[i][3] = "date and time";
+            LocalDate dt = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. LLLL yyyy");
+            String formatted_date = dt.format(formatter);
+
+            Date currentTime = Calendar.getInstance().getTime();
+
+            dbSessions[i][0] = "col" + i;                  // Color
+            dbSessions[i][1] = "tag" + i;                  // Tagname
+            dbSessions[i][2] = currentTime + "";        // Date and time of session
+            dbSessions[i][3] = "" + (i * 10);            // Duration
         }
     }
 
@@ -89,6 +115,31 @@ public class DBSimulator {
             word += alphabet.charAt(r.nextInt(alphabet.length()));
         }
         return word;
+    }
+
+    public static void printDBList() {
+        for(String tag : dbTagsList)
+            Log.d("undertale", tag);
+    }
+
+    public static void addToDBTagList(String tag) {
+        dbTagsList.add(tag);
+    }
+
+    public static void deleteFromDBTagList(String tag) {
+        dbTagsList.remove(tag);
+    }
+
+    public static void initializeDBTagList() {
+        addToDBTagList("PELIKAN");
+        /*
+
+        for (int i = 0; i < 10; i++) {
+            addToDBTagList(createRandomWord((new Random()).nextInt(10-3) + 3));
+            //Log.d("test", "initializeDBTagList: " + dbTagsList.get(dbTagsList.size() - 1));
+        }
+
+         */
     }
 
 }

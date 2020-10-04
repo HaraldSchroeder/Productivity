@@ -31,6 +31,21 @@
         android:text="PRODUCTIVE TIME"
         android:textSize="36sp" />
 
+    <TextView
+        android:id="@+id/tv_breakTimeNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:text="Overall break time:" />
+
+    <TextView
+        android:id="@+id/tv_breakTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_timeview"
+        android:layout_toRightOf="@id/tv_breakTimeNotification"
+        android:text="Break Time" />
+
     <Button
         android:id="@+id/bt_home"
         android:layout_width="wrap_content"

@@ -1,28 +1,22 @@
 package com.example.productivity;
 
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.WeekFields;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class Wiese extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -50,12 +44,19 @@ public class Wiese extends AppCompatActivity implements AdapterView.OnItemSelect
         btn_passive_color = ((ColorDrawable) findViewById(R.id.btn_week).getBackground()).getColor();
         btn_active = findViewById(R.id.btn_day);
 
-
+        /*
         // Initialize (simulated) DB connection
+        if (!DBSimulator.initialized) {
+            DBSimulator.InitializeTestArray();
+            DBSimulator.initialized = true;
+        }
+        */
         if (!DBSimulator.dbSessionsInitialized) {
             DBSimulator.InitializeSessionArray();
             DBSimulator.dbSessionsInitialized = true;
         }
+
+        addTagsToDropdown();
 
         c = Calendar.getInstance();
         c.set(Calendar.DAY_OF_WEEK, start_of_week);
@@ -66,6 +67,7 @@ public class Wiese extends AppCompatActivity implements AdapterView.OnItemSelect
         tv_date.setText(currently_selected_date.toString());
 
         SelectDateRange(btn_active);
+        productiveTimeAvg();
     }
 
     @Override
@@ -168,6 +170,46 @@ public class Wiese extends AppCompatActivity implements AdapterView.OnItemSelect
 
     }
 
+    private void addTagsToDropdown() {
+        Spinner dropdown_tagSelection = (Spinner) findViewById(R.id.sp_tagSelection);
+
+        String[] tags = new String[5];
+        tags[0] = "all tags";
+        for (int i = 1; i < tags.length; i++) {
+            tags[i] = DBSimulator.dbSessions[i-1][1];
+        }
+        List<String> tagList = new ArrayList<>(Arrays.asList(tags));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_items, tagList);
+        adapter.setDropDownViewResource(R.layout.spinner_items);
+        dropdown_tagSelection.setAdapter(adapter);
+    }
+
+    private void productiveTimeAvg() { // muss noch angepasst werden an Tag, Woche, Monat etc.
+        TextView avgProductiveTime = (TextView) findViewById(R.id.tv_avgProductiveTime);
+        int res = 0;
+        int productiveDays = 0;
+
+        for (int i = 0; i < 4; i++) {
+            int productiveTime = Integer.parseInt(DBSimulator.dbSessions[i][3]);
+            if (productiveTime > 0)  {
+                res += productiveTime;
+                productiveDays++;
+            }
+        }
+        res /= productiveDays;
+        avgProductiveTime.setText(getTime(res));
+    }
+
+    private String getTime(int t) {
+        int hours = t / 3600;
+        int minutes = (t % 3600) / 60;
+        int secs = t % 60;
+
+        return String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, secs);
+    }
+
+
+
 /*
 Cool functionality:
 - average amount of productive time per day/week/month/year
@@ -175,8 +217,5 @@ Cool functionality:
 - average time when user is most productive
 
  */
-
-
-
 
 }

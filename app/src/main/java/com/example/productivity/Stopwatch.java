@@ -3,13 +3,18 @@ package com.example.productivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,7 +45,10 @@ public class Stopwatch extends AppCompatActivity {
     private View bt_pause;
     private View bt_continue;
 
-    private PopupWindow tagsPopup;
+    private int breakTime;
+    private int productiveTime;
+
+    //private Popup popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +64,20 @@ public class Stopwatch extends AppCompatActivity {
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
 
+        Intent intent = getIntent();
+        if (intent != null) {
+
+            seconds = intent.getIntExtra("productive_time", 0);
+
+            breakTime = intent.getIntExtra("break_time", 0);
+        }
+
+        Log.d("pelikan", productiveTime + "  " + breakTime);
+
         bt_pause = (View) findViewById(R.id.bt_pause);
         bt_continue = (View) findViewById(R.id.bt_continue);
+
+        //popup = new Popup();
 
         onClickStart(bt_continue);
         runTimer();
@@ -109,8 +129,14 @@ public class Stopwatch extends AppCompatActivity {
     // when the Stop button is clicked.
     public void onClickStop(View view) {
         running = false;
-        bt_pause.setVisibility(View.GONE);
-        bt_continue.setVisibility(View.VISIBLE);
+        //bt_pause.setVisibility(View.GONE);
+        //bt_continue.setVisibility(View.VISIBLE);
+
+        Intent loadPage = new Intent(this, CoffeeBreak.class);
+        //productiveTime = getTime();
+        loadPage.putExtra("productive_time", seconds);
+        loadPage.putExtra("break_time", breakTime);
+        startActivity(loadPage);
     }
 
     // Reset the stopwatch when
@@ -144,13 +170,9 @@ public class Stopwatch extends AppCompatActivity {
             @Override
 
             public void run() {
-                int hours = seconds / 3600;
-                int minutes = (seconds % 3600) / 60;
-                int secs = seconds % 60;
-
                 // Format the seconds into hours, minutes,
                 // and seconds.
-                String time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, secs);
+                String time = getTime(seconds);
 
                 // Set the text view text.
                 timeView.setText(time);
@@ -168,23 +190,33 @@ public class Stopwatch extends AppCompatActivity {
         });
     }
 
+    private String getTime(int t) {
+        int hours = t / 3600;
+        int minutes = (t % 3600) / 60;
+        int secs = t % 60;
+
+        return String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, secs);
+    }
+
     public void endSession(View view) {
         Intent loadPage = new Intent(this, Finish.class);
+        //productiveTime = getTime();
+        loadPage.putExtra("overall_productive_time", getTime(seconds));
+        loadPage.putExtra("overall_break_time", getTime(breakTime));
         startActivity(loadPage);
     }
 
     public void editTags(View view) {
-        RelativeLayout rl_root = (RelativeLayout) findViewById(R.id.rl_root);
-        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View customView = layoutInflater.inflate(R.layout.popup, null);
-        Button bt_editTags = (Button) findViewById(R.id.bt_editTags);
-        Button bt_closePopup = (Button) customView.findViewById(R.id.bt_close);
-        tagsPopup = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tagsPopup.showAtLocation(rl_root, Gravity.CENTER, 0, 0);
+        LinearLayout tag_area = (LinearLayout) getLayoutInflater().inflate(R.layout.popup, null).findViewById(R.id.tag_area);
+        //Popup.open((RelativeLayout) findViewById(R.id.rl_root), (Button) findViewById(R.id.bt_editTags), (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE), tag_area);
     }
 
     public void closePopup(View view) {
-        tagsPopup.dismiss();
+        Popup.close();
+    }
+
+    public void onClick(View view) {
+        Popup.selectTags(view);
     }
 
 }

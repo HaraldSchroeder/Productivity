@@ -10,17 +10,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Finish extends AppCompatActivity {
 
-    private PopupWindow tagsPopup;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.finish);
+
+        Intent intent = getIntent();
+        TextView tv_timeview = (TextView) findViewById(R.id.tv_timeview);
+        tv_timeview.setText(intent.getStringExtra("overall_productive_time"));
+        TextView tv_breakTime = (TextView) findViewById(R.id.tv_breakTime);
+        tv_breakTime.setText(intent.getStringExtra("overall_break_time"));
     }
 
     public void returnHome(View view) {
@@ -34,16 +39,14 @@ public class Finish extends AppCompatActivity {
     }
 
     public void editTags(View view) {
-        RelativeLayout rl_root = (RelativeLayout) findViewById(R.id.rl_root);
-        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View customView = layoutInflater.inflate(R.layout.popup, null);
-        Button bt_editTags = (Button) findViewById(R.id.bt_editTags);
-        Button bt_closePopup = (Button) customView.findViewById(R.id.bt_close);
-        tagsPopup = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tagsPopup.showAtLocation(rl_root, Gravity.CENTER, 0, 0);
+        //Popup.open((RelativeLayout) findViewById(R.id.rl_root), (Button) findViewById(R.id.bt_editTags), (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
     }
 
     public void closePopup(View view) {
-        tagsPopup.dismiss();
+        Popup.close();
+    }
+
+    public void onClick(View view) {
+        Popup.selectTags(view);
     }
 }

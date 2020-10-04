@@ -25,5 +25,6 @@
         <activity android:name=".Wiese"></activity>
         <activity android:name=".Stopwatch"></activity>
         <activity android:name=".Timer"></activity>
+        <activity android:name=".CoffeeBreak"></activity>
     </application>
 </manifest>

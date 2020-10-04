@@ -33,9 +33,6 @@ public class Tags extends AppCompatActivity {
 
         DrawTaglist();
 
-        Button btnAddTag = findViewById(R.id.bt_addTag);
-        btnAddTag.setOnClickListener(HandleAddTag(btnAddTag));
-
         SearchView searchbar = (SearchView) findViewById(R.id.searchbar);
         CharSequence queryHint = searchbar.getQueryHint();
         Log.d("searchbar", queryHint + "");
@@ -103,35 +100,34 @@ public class Tags extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener HandleAddTag(final Button btnAddTag) {
-        return new View.OnClickListener() {
-            public void onClick(View v) {
-                final EditText tagToBeAdded = new EditText(Tags.this);
+    // Method is called by pushing add tag button
+    // Adds a new tag to the collection
+    public void onClickAddTag(View view) {
+        final EditText tagToBeAdded = new EditText(Tags.this);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(Tags.this);
-                builder.setCancelable(true);
-                builder.setTitle("Add new tag");
-                builder.setMessage("Der Name fügt sich nicht von allein hinzu, also los jetzt!");
-                builder.setView(tagToBeAdded);
-                builder.setPositiveButton("Confirm",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                AddTag(String.valueOf(tagToBeAdded.getText()));
-                            }
-                        });
-                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Tags.this);
+        builder.setCancelable(true);
+        builder.setTitle("Add new tag");
+        builder.setMessage("Der Name fügt sich nicht von allein hinzu, also los jetzt!");
+        builder.setView(tagToBeAdded);
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        AddTag(String.valueOf(tagToBeAdded.getText()));
                     }
                 });
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
             }
-        };
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
+    // Edits existing tag
     View.OnClickListener HandleEditTag(final Button btn, final String tagname) {
         return new View.OnClickListener() {
             public void onClick(View v) {
@@ -186,12 +182,7 @@ public class Tags extends AppCompatActivity {
         DrawTaglist();
     }
 
-    private void ListDBEntries() {
-        for (int i = 0; i < DBSimulator.dbTags.length; i++) {
-            Log.d("db", "item: " + i + ", " + DBSimulator.dbTags[i][1]);
-        }
-    }
-
+    // Clears view of all tag views
     private void ClearTagList() {
         LinearLayout tag_area = findViewById(R.id.tag_area);
         if (tag_area.getChildCount() > 0) {
@@ -199,10 +190,12 @@ public class Tags extends AppCompatActivity {
         }
     }
 
+    // TODO: implement search bar
     private void SearchTag() {
 
     }
 
+    // TODO: implement unique tags only
     private boolean IsTagUnique(String tagname) {
         return (DBSimulator.FindTag(tagname) == -1);
     }
